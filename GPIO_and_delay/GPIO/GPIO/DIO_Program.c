@@ -1,0 +1,154 @@
+/*
+ * DIO_Program.c
+ *
+ * Created: 2/13/2019 2:45:35 PM
+ *  Author: AVE-LAP-005
+ */ 
+#include "Types.h"
+#include "DIO_Registers.h"
+#include "DIO_Interface.h"
+#include "BitwiseOperations.h"
+static void Apply(GPIO* Gpio,uint8 Copy_u8Value,uint8 PinNum);
+static Apply_Read(GPIO* Gpio,uint8 PinNum);
+static Apply_Dir(GPIO* Gpio,uint8 PinNum,uint8 PinDirection);
+void DIO_WritePin(uint8 PinNum,uint8 PinValue){
+	uint8* Local_Copy_Address=0;
+	if ((PinNum<=pin7) && (PinNum>=pin0))
+	{
+		Local_Copy_Address=GPIOA_DIO;
+	}
+	else if ((PinNum<=pin15) && (PinNum>=pin8))
+	{
+		Local_Copy_Address=GPIOB_DIO;
+	}
+	else if ((PinNum<=pin23) && (PinNum>=pin16))
+	{
+		Local_Copy_Address=GPIOC_DIO;
+	}else if ((PinNum<=pin31) && (PinNum>=pin24))
+	{
+		Local_Copy_Address=GPIOD_DIO;
+	}
+	
+	Apply(Local_Copy_Address,PinValue,PinNum);
+	
+	
+}
+
+static void Apply(GPIO* Gpio,uint8 Copy_u8Value,uint8 PinNum){
+	uint8 Local_Copyu8_Actuall_Pin=0;
+	if ((PinNum<=pin7) && (PinNum>=pin0))
+	{
+		Local_Copyu8_Actuall_Pin=PinNum;
+	}
+	else if ((PinNum<=pin15) && (PinNum>=pin8))
+	{
+		Local_Copyu8_Actuall_Pin=PinNum-8;
+	}
+	else if ((PinNum<=pin23) && (PinNum>=pin16))
+	{
+		Local_Copyu8_Actuall_Pin=PinNum-16;
+	}else if ((PinNum<=pin31) && (PinNum>=pin24))
+	{
+		Local_Copyu8_Actuall_Pin=PinNum-24;
+	}
+	switch (Copy_u8Value)
+	{
+		case High:Set_Bit((Gpio->PORT),Local_Copyu8_Actuall_Pin); break;
+		case LOW:Clear_Bit((Gpio->PORT),Local_Copyu8_Actuall_Pin); break;
+	}
+	
+}
+uint8 DIO_ReadPin(uint8 PinNum){
+	uint8* Local_Copy_Address=0;
+	if ((PinNum<=pin7) && (PinNum>=pin0))
+	{
+		Local_Copy_Address=GPIOA_DIO;
+	}
+	else if ((PinNum<=pin15) && (PinNum>=pin8))
+	{
+		Local_Copy_Address=GPIOB_DIO;
+	}
+	else if ((PinNum<=pin23) && (PinNum>=pin16))
+	{
+		Local_Copy_Address=GPIOC_DIO;
+	}else if ((PinNum<=pin31) && (PinNum>=pin24))
+	{
+		Local_Copy_Address=GPIOD_DIO;
+	}
+	
+	Apply_Read(Local_Copy_Address,PinNum);	
+	
+	
+}
+
+static Apply_Read(GPIO* Gpio,uint8 PinNum){
+	uint8 Local_Copyu8_Actuall_Pin=0;
+	if ((PinNum<=pin7) && (PinNum>=pin0))
+	{
+		Local_Copyu8_Actuall_Pin=PinNum;
+	}
+	else if ((PinNum<=pin15) && (PinNum>=pin8))
+	{
+		Local_Copyu8_Actuall_Pin=PinNum-8;
+	}
+	else if ((PinNum<=pin23) && (PinNum>=pin16))
+	{
+		Local_Copyu8_Actuall_Pin=PinNum-16;
+	}else if ((PinNum<=pin31) && (PinNum>=pin24))
+	{
+		Local_Copyu8_Actuall_Pin=PinNum-24;
+	}
+	
+	Get_Bit(Gpio->PIN,Local_Copyu8_Actuall_Pin);
+	
+}
+void DIO_SetPinDirection(uint8 PinNum,uint8 PinDirection){
+	uint8* Local_Copy_Address=0;
+	if ((PinNum<=pin7) && (PinNum>=pin0))
+	{
+		Local_Copy_Address=GPIOA_DIO;
+	}
+	else if ((PinNum<=pin15) && (PinNum>=pin8))
+	{
+		Local_Copy_Address=GPIOB_DIO;
+	}
+	else if ((PinNum<=pin23) && (PinNum>=pin16))
+	{
+		Local_Copy_Address=GPIOC_DIO;
+	}else if ((PinNum<=pin31) && (PinNum>=pin24))
+	{
+		Local_Copy_Address=GPIOD_DIO;
+	}
+	
+	Apply_Dir(Local_Copy_Address,PinNum,PinDirection);
+	
+}
+
+
+static Apply_Dir(GPIO* Gpio,uint8 PinNum,uint8 PinDirection){
+	
+	uint8 Local_Copyu8_Actuall_Pin=0;
+	if ((PinNum<=pin7) && (PinNum>=pin0))
+	{
+		Local_Copyu8_Actuall_Pin=PinNum;
+	}
+	else if ((PinNum<=pin15) && (PinNum>=pin8))
+	{
+		Local_Copyu8_Actuall_Pin=PinNum-8;
+	}
+	else if ((PinNum<=pin23) && (PinNum>=pin16))
+	{
+		Local_Copyu8_Actuall_Pin=PinNum-16;
+	}else if ((PinNum<=pin31) && (PinNum>=pin24))
+	{
+		Local_Copyu8_Actuall_Pin=PinNum-24;
+	}
+	switch(PinDirection){
+		case Input_PUll_UP:Clear_Bit(Gpio->DDR,Local_Copyu8_Actuall_Pin);Set_Bit(Gpio->PORT,Local_Copyu8_Actuall_Pin); break;
+		case INPUT_WITHOUT_PULL:Clear_Bit(Gpio->DDR,Local_Copyu8_Actuall_Pin);Clear_Bit(Gpio->PORT,Local_Copyu8_Actuall_Pin); break;
+		case OUTPUT:Set_Bit(Gpio->DDR,Local_Copyu8_Actuall_Pin);break;
+		
+		
+	}
+	
+}
