@@ -1,0 +1,872 @@
+
+Timer0.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000416  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000000  00800060  00800060  0000048a  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000009  00800060  00800060  0000048a  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  0000048a  2**0
+                  CONTENTS, READONLY
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  000004bc  2**2
+                  CONTENTS, READONLY
+  5 .debug_aranges 000000b8  00000000  00000000  000004f8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   00000cb0  00000000  00000000  000005b0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 000007bd  00000000  00000000  00001260  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   000005d8  00000000  00000000  00001a1d  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  000001ac  00000000  00000000  00001ff8  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    000004a2  00000000  00000000  000021a4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    000006fa  00000000  00000000  00002646  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_ranges 00000100  00000000  00000000  00002d40  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+   8:	0c 94 dd 01 	jmp	0x3ba	; 0x3ba <__vector_2>
+   c:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  10:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  14:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  18:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  1c:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  20:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  24:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  28:	0c 94 b0 01 	jmp	0x360	; 0x360 <__vector_10>
+  2c:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  30:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  34:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  38:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  3c:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  40:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  44:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  48:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  4c:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  50:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_clear_bss>:
+  60:	20 e0       	ldi	r18, 0x00	; 0
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	01 c0       	rjmp	.+2      	; 0x6a <.do_clear_bss_start>
+
+00000068 <.do_clear_bss_loop>:
+  68:	1d 92       	st	X+, r1
+
+0000006a <.do_clear_bss_start>:
+  6a:	a9 36       	cpi	r26, 0x69	; 105
+  6c:	b2 07       	cpc	r27, r18
+  6e:	e1 f7       	brne	.-8      	; 0x68 <.do_clear_bss_loop>
+  70:	0e 94 64 01 	call	0x2c8	; 0x2c8 <main>
+  74:	0c 94 09 02 	jmp	0x412	; 0x412 <_exit>
+
+00000078 <__bad_interrupt>:
+  78:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+0000007c <DIO_WritePin>:
+static void Apply(GPIO* Gpio,uint8 Copy_u8Value,uint8 PinNum);
+static uint8 Apply_Read(GPIO* Gpio,uint8 PinNum);
+static void Apply_Dir(GPIO* Gpio,uint8 PinNum,uint8 PinDirection);
+void DIO_WritePin(uint8 PinNum,uint8 PinValue){
+	GPIO* Local_Copy_Address=0;
+	if ((PinNum<=pin7) && (PinNum>=pin0))
+  7c:	88 30       	cpi	r24, 0x08	; 8
+  7e:	98 f0       	brcs	.+38     	; 0xa6 <DIO_WritePin+0x2a>
+	{
+		Local_Copy_Address=GPIOA_DIO;
+	}
+	else if ((PinNum<=pin15) && (PinNum>=pin8))
+  80:	98 ef       	ldi	r25, 0xF8	; 248
+  82:	98 0f       	add	r25, r24
+  84:	98 30       	cpi	r25, 0x08	; 8
+  86:	90 f0       	brcs	.+36     	; 0xac <DIO_WritePin+0x30>
+	{
+		Local_Copy_Address=GPIOB_DIO;
+	}
+	else if ((PinNum<=pin23) && (PinNum>=pin16))
+  88:	90 ef       	ldi	r25, 0xF0	; 240
+  8a:	98 0f       	add	r25, r24
+  8c:	98 30       	cpi	r25, 0x08	; 8
+  8e:	a0 f1       	brcs	.+104    	; 0xf8 <DIO_WritePin+0x7c>
+	{
+		Local_Copy_Address=GPIOC_DIO;
+	}else if ((PinNum<=pin31) && (PinNum>=pin24))
+  90:	98 ee       	ldi	r25, 0xE8	; 232
+  92:	98 0f       	add	r25, r24
+  94:	98 30       	cpi	r25, 0x08	; 8
+  96:	98 f5       	brcc	.+102    	; 0xfe <DIO_WritePin+0x82>
+	{
+		Local_Copy_Address=GPIOD_DIO;
+  98:	e0 e3       	ldi	r30, 0x30	; 48
+  9a:	f0 e0       	ldi	r31, 0x00	; 0
+  9c:	32 c0       	rjmp	.+100    	; 0x102 <DIO_WritePin+0x86>
+		Local_Copyu8_Actuall_Pin=PinNum-8;
+	}
+	else if ((PinNum<=pin23) && (PinNum>=pin16))
+	{
+		Local_Copyu8_Actuall_Pin=PinNum-16;
+	}else if ((PinNum<=pin31) && (PinNum>=pin24))
+  9e:	88 51       	subi	r24, 0x18	; 24
+  a0:	88 30       	cpi	r24, 0x08	; 8
+  a2:	40 f4       	brcc	.+16     	; 0xb4 <DIO_WritePin+0x38>
+  a4:	0a c0       	rjmp	.+20     	; 0xba <DIO_WritePin+0x3e>
+static void Apply_Dir(GPIO* Gpio,uint8 PinNum,uint8 PinDirection);
+void DIO_WritePin(uint8 PinNum,uint8 PinValue){
+	GPIO* Local_Copy_Address=0;
+	if ((PinNum<=pin7) && (PinNum>=pin0))
+	{
+		Local_Copy_Address=GPIOA_DIO;
+  a6:	e9 e3       	ldi	r30, 0x39	; 57
+  a8:	f0 e0       	ldi	r31, 0x00	; 0
+  aa:	07 c0       	rjmp	.+14     	; 0xba <DIO_WritePin+0x3e>
+	{
+		Local_Copyu8_Actuall_Pin=PinNum;
+	}
+	else if ((PinNum<=pin15) && (PinNum>=pin8))
+	{
+		Local_Copyu8_Actuall_Pin=PinNum-8;
+  ac:	89 2f       	mov	r24, r25
+	{
+		Local_Copy_Address=GPIOA_DIO;
+	}
+	else if ((PinNum<=pin15) && (PinNum>=pin8))
+	{
+		Local_Copy_Address=GPIOB_DIO;
+  ae:	e6 e3       	ldi	r30, 0x36	; 54
+  b0:	f0 e0       	ldi	r31, 0x00	; 0
+  b2:	03 c0       	rjmp	.+6      	; 0xba <DIO_WritePin+0x3e>
+	
+	
+}
+
+static void Apply(GPIO* Gpio,uint8 Copy_u8Value,uint8 PinNum){
+	uint8 Local_Copyu8_Actuall_Pin=0;
+  b4:	80 e0       	ldi	r24, 0x00	; 0
+  b6:	01 c0       	rjmp	.+2      	; 0xba <DIO_WritePin+0x3e>
+	{
+		Local_Copyu8_Actuall_Pin=PinNum-8;
+	}
+	else if ((PinNum<=pin23) && (PinNum>=pin16))
+	{
+		Local_Copyu8_Actuall_Pin=PinNum-16;
+  b8:	89 2f       	mov	r24, r25
+	}else if ((PinNum<=pin31) && (PinNum>=pin24))
+	{
+		Local_Copyu8_Actuall_Pin=PinNum-24;
+	}
+	switch (Copy_u8Value)
+  ba:	66 23       	and	r22, r22
+  bc:	79 f0       	breq	.+30     	; 0xdc <DIO_WritePin+0x60>
+  be:	61 30       	cpi	r22, 0x01	; 1
+  c0:	29 f5       	brne	.+74     	; 0x10c <DIO_WritePin+0x90>
+	{
+		case High:Set_Bit((Gpio->PORT),Local_Copyu8_Actuall_Pin); break;
+  c2:	21 e0       	ldi	r18, 0x01	; 1
+  c4:	30 e0       	ldi	r19, 0x00	; 0
+  c6:	a9 01       	movw	r20, r18
+  c8:	02 c0       	rjmp	.+4      	; 0xce <DIO_WritePin+0x52>
+  ca:	44 0f       	add	r20, r20
+  cc:	55 1f       	adc	r21, r21
+  ce:	8a 95       	dec	r24
+  d0:	e2 f7       	brpl	.-8      	; 0xca <DIO_WritePin+0x4e>
+  d2:	ca 01       	movw	r24, r20
+  d4:	92 81       	ldd	r25, Z+2	; 0x02
+  d6:	89 2b       	or	r24, r25
+  d8:	82 83       	std	Z+2, r24	; 0x02
+  da:	08 95       	ret
+		case LOW:Clear_Bit((Gpio->PORT),Local_Copyu8_Actuall_Pin); break;
+  dc:	21 e0       	ldi	r18, 0x01	; 1
+  de:	30 e0       	ldi	r19, 0x00	; 0
+  e0:	a9 01       	movw	r20, r18
+  e2:	02 c0       	rjmp	.+4      	; 0xe8 <DIO_WritePin+0x6c>
+  e4:	44 0f       	add	r20, r20
+  e6:	55 1f       	adc	r21, r21
+  e8:	8a 95       	dec	r24
+  ea:	e2 f7       	brpl	.-8      	; 0xe4 <DIO_WritePin+0x68>
+  ec:	ca 01       	movw	r24, r20
+  ee:	80 95       	com	r24
+  f0:	92 81       	ldd	r25, Z+2	; 0x02
+  f2:	89 23       	and	r24, r25
+  f4:	82 83       	std	Z+2, r24	; 0x02
+	}
+	
+	Apply(Local_Copy_Address,PinValue,PinNum);
+	
+	
+}
+  f6:	08 95       	ret
+	{
+		Local_Copy_Address=GPIOB_DIO;
+	}
+	else if ((PinNum<=pin23) && (PinNum>=pin16))
+	{
+		Local_Copy_Address=GPIOC_DIO;
+  f8:	e3 e3       	ldi	r30, 0x33	; 51
+  fa:	f0 e0       	ldi	r31, 0x00	; 0
+  fc:	02 c0       	rjmp	.+4      	; 0x102 <DIO_WritePin+0x86>
+#include <avr/interrupt.h>
+static void Apply(GPIO* Gpio,uint8 Copy_u8Value,uint8 PinNum);
+static uint8 Apply_Read(GPIO* Gpio,uint8 PinNum);
+static void Apply_Dir(GPIO* Gpio,uint8 PinNum,uint8 PinDirection);
+void DIO_WritePin(uint8 PinNum,uint8 PinValue){
+	GPIO* Local_Copy_Address=0;
+  fe:	e0 e0       	ldi	r30, 0x00	; 0
+ 100:	f0 e0       	ldi	r31, 0x00	; 0
+	}
+	else if ((PinNum<=pin15) && (PinNum>=pin8))
+	{
+		Local_Copyu8_Actuall_Pin=PinNum-8;
+	}
+	else if ((PinNum<=pin23) && (PinNum>=pin16))
+ 102:	90 ef       	ldi	r25, 0xF0	; 240
+ 104:	98 0f       	add	r25, r24
+ 106:	98 30       	cpi	r25, 0x08	; 8
+ 108:	b8 f2       	brcs	.-82     	; 0xb8 <DIO_WritePin+0x3c>
+ 10a:	c9 cf       	rjmp	.-110    	; 0x9e <DIO_WritePin+0x22>
+ 10c:	08 95       	ret
+
+0000010e <DIO_ReadPin>:
+	}
+	
+}
+uint8 DIO_ReadPin(uint8 PinNum){
+	GPIO* Local_Copy_Address=0;
+	if ((PinNum<=pin7) && (PinNum>=pin0))
+ 10e:	88 30       	cpi	r24, 0x08	; 8
+ 110:	98 f0       	brcs	.+38     	; 0x138 <DIO_ReadPin+0x2a>
+	{
+		Local_Copy_Address=GPIOA_DIO;
+	}
+	else if ((PinNum<=pin15) && (PinNum>=pin8))
+ 112:	98 ef       	ldi	r25, 0xF8	; 248
+ 114:	98 0f       	add	r25, r24
+ 116:	98 30       	cpi	r25, 0x08	; 8
+ 118:	90 f0       	brcs	.+36     	; 0x13e <DIO_ReadPin+0x30>
+	{
+		Local_Copy_Address=GPIOB_DIO;
+	}
+	else if ((PinNum<=pin23) && (PinNum>=pin16))
+ 11a:	90 ef       	ldi	r25, 0xF0	; 240
+ 11c:	98 0f       	add	r25, r24
+ 11e:	98 30       	cpi	r25, 0x08	; 8
+ 120:	b0 f0       	brcs	.+44     	; 0x14e <DIO_ReadPin+0x40>
+	{
+		Local_Copy_Address=GPIOC_DIO;
+	}else if ((PinNum<=pin31) && (PinNum>=pin24))
+ 122:	98 ee       	ldi	r25, 0xE8	; 232
+ 124:	98 0f       	add	r25, r24
+ 126:	98 30       	cpi	r25, 0x08	; 8
+ 128:	a8 f4       	brcc	.+42     	; 0x154 <DIO_ReadPin+0x46>
+	{
+		Local_Copy_Address=GPIOD_DIO;
+ 12a:	e0 e3       	ldi	r30, 0x30	; 48
+ 12c:	f0 e0       	ldi	r31, 0x00	; 0
+ 12e:	14 c0       	rjmp	.+40     	; 0x158 <DIO_ReadPin+0x4a>
+		Local_Copyu8_Actuall_Pin=PinNum-8;
+	}
+	else if ((PinNum<=pin23) && (PinNum>=pin16))
+	{
+		Local_Copyu8_Actuall_Pin=PinNum-16;
+	}else if ((PinNum<=pin31) && (PinNum>=pin24))
+ 130:	88 51       	subi	r24, 0x18	; 24
+ 132:	88 30       	cpi	r24, 0x08	; 8
+ 134:	b0 f0       	brcs	.+44     	; 0x162 <DIO_ReadPin+0x54>
+ 136:	07 c0       	rjmp	.+14     	; 0x146 <DIO_ReadPin+0x38>
+}
+uint8 DIO_ReadPin(uint8 PinNum){
+	GPIO* Local_Copy_Address=0;
+	if ((PinNum<=pin7) && (PinNum>=pin0))
+	{
+		Local_Copy_Address=GPIOA_DIO;
+ 138:	e9 e3       	ldi	r30, 0x39	; 57
+ 13a:	f0 e0       	ldi	r31, 0x00	; 0
+ 13c:	12 c0       	rjmp	.+36     	; 0x162 <DIO_ReadPin+0x54>
+	{
+		Local_Copyu8_Actuall_Pin=PinNum;
+	}
+	else if ((PinNum<=pin15) && (PinNum>=pin8))
+	{
+		Local_Copyu8_Actuall_Pin=PinNum-8;
+ 13e:	89 2f       	mov	r24, r25
+	{
+		Local_Copy_Address=GPIOA_DIO;
+	}
+	else if ((PinNum<=pin15) && (PinNum>=pin8))
+	{
+		Local_Copy_Address=GPIOB_DIO;
+ 140:	e6 e3       	ldi	r30, 0x36	; 54
+ 142:	f0 e0       	ldi	r31, 0x00	; 0
+ 144:	0e c0       	rjmp	.+28     	; 0x162 <DIO_ReadPin+0x54>
+	
+	
+}
+
+static uint8 Apply_Read(GPIO* Gpio,uint8 PinNum){
+	uint8 Local_Copyu8_Actuall_Pin=0;
+ 146:	80 e0       	ldi	r24, 0x00	; 0
+ 148:	0c c0       	rjmp	.+24     	; 0x162 <DIO_ReadPin+0x54>
+	{
+		Local_Copyu8_Actuall_Pin=PinNum-8;
+	}
+	else if ((PinNum<=pin23) && (PinNum>=pin16))
+	{
+		Local_Copyu8_Actuall_Pin=PinNum-16;
+ 14a:	89 2f       	mov	r24, r25
+ 14c:	0a c0       	rjmp	.+20     	; 0x162 <DIO_ReadPin+0x54>
+	{
+		Local_Copy_Address=GPIOB_DIO;
+	}
+	else if ((PinNum<=pin23) && (PinNum>=pin16))
+	{
+		Local_Copy_Address=GPIOC_DIO;
+ 14e:	e3 e3       	ldi	r30, 0x33	; 51
+ 150:	f0 e0       	ldi	r31, 0x00	; 0
+ 152:	02 c0       	rjmp	.+4      	; 0x158 <DIO_ReadPin+0x4a>
+		case LOW:Clear_Bit((Gpio->PORT),Local_Copyu8_Actuall_Pin); break;
+	}
+	
+}
+uint8 DIO_ReadPin(uint8 PinNum){
+	GPIO* Local_Copy_Address=0;
+ 154:	e0 e0       	ldi	r30, 0x00	; 0
+ 156:	f0 e0       	ldi	r31, 0x00	; 0
+	}
+	else if ((PinNum<=pin15) && (PinNum>=pin8))
+	{
+		Local_Copyu8_Actuall_Pin=PinNum-8;
+	}
+	else if ((PinNum<=pin23) && (PinNum>=pin16))
+ 158:	90 ef       	ldi	r25, 0xF0	; 240
+ 15a:	98 0f       	add	r25, r24
+ 15c:	98 30       	cpi	r25, 0x08	; 8
+ 15e:	40 f7       	brcc	.-48     	; 0x130 <DIO_ReadPin+0x22>
+ 160:	f4 cf       	rjmp	.-24     	; 0x14a <DIO_ReadPin+0x3c>
+	}else if ((PinNum<=pin31) && (PinNum>=pin24))
+	{
+		Local_Copy_Address=GPIOD_DIO;
+	}
+	
+	return Apply_Read(Local_Copy_Address,PinNum);	
+ 162:	20 81       	ld	r18, Z
+ 164:	42 2f       	mov	r20, r18
+ 166:	50 e0       	ldi	r21, 0x00	; 0
+ 168:	21 e0       	ldi	r18, 0x01	; 1
+ 16a:	30 e0       	ldi	r19, 0x00	; 0
+ 16c:	08 2e       	mov	r0, r24
+ 16e:	02 c0       	rjmp	.+4      	; 0x174 <DIO_ReadPin+0x66>
+ 170:	22 0f       	add	r18, r18
+ 172:	33 1f       	adc	r19, r19
+ 174:	0a 94       	dec	r0
+ 176:	e2 f7       	brpl	.-8      	; 0x170 <DIO_ReadPin+0x62>
+ 178:	24 23       	and	r18, r20
+ 17a:	35 23       	and	r19, r21
+ 17c:	a9 01       	movw	r20, r18
+ 17e:	02 c0       	rjmp	.+4      	; 0x184 <DIO_ReadPin+0x76>
+ 180:	55 95       	asr	r21
+ 182:	47 95       	ror	r20
+ 184:	8a 95       	dec	r24
+ 186:	e2 f7       	brpl	.-8      	; 0x180 <DIO_ReadPin+0x72>
+ 188:	ca 01       	movw	r24, r20
+	
+	
+}
+ 18a:	08 95       	ret
+
+0000018c <DIO_SetPinDirection>:
+	
+	
+}
+void DIO_SetPinDirection(uint8 PinNum,uint8 PinDirection){
+	GPIO* Local_Copy_Address=0;
+	if ((PinNum<=pin7) && (PinNum>=pin0))
+ 18c:	88 30       	cpi	r24, 0x08	; 8
+ 18e:	a8 f0       	brcs	.+42     	; 0x1ba <DIO_SetPinDirection+0x2e>
+	{
+		Local_Copy_Address=GPIOA_DIO;
+	}
+	else if ((PinNum<=pin15) && (PinNum>=pin8))
+ 190:	98 ef       	ldi	r25, 0xF8	; 248
+ 192:	98 0f       	add	r25, r24
+ 194:	98 30       	cpi	r25, 0x08	; 8
+ 196:	a0 f0       	brcs	.+40     	; 0x1c0 <DIO_SetPinDirection+0x34>
+	{
+		Local_Copy_Address=GPIOB_DIO;
+	}
+	else if ((PinNum<=pin23) && (PinNum>=pin16))
+ 198:	90 ef       	ldi	r25, 0xF0	; 240
+ 19a:	98 0f       	add	r25, r24
+ 19c:	98 30       	cpi	r25, 0x08	; 8
+ 19e:	08 f4       	brcc	.+2      	; 0x1a2 <DIO_SetPinDirection+0x16>
+ 1a0:	4c c0       	rjmp	.+152    	; 0x23a <DIO_SetPinDirection+0xae>
+	{
+		Local_Copy_Address=GPIOC_DIO;
+	}else if ((PinNum<=pin31) && (PinNum>=pin24))
+ 1a2:	98 ee       	ldi	r25, 0xE8	; 232
+ 1a4:	98 0f       	add	r25, r24
+ 1a6:	98 30       	cpi	r25, 0x08	; 8
+ 1a8:	08 f0       	brcs	.+2      	; 0x1ac <DIO_SetPinDirection+0x20>
+ 1aa:	4a c0       	rjmp	.+148    	; 0x240 <DIO_SetPinDirection+0xb4>
+	{
+		Local_Copy_Address=GPIOD_DIO;
+ 1ac:	e0 e3       	ldi	r30, 0x30	; 48
+ 1ae:	f0 e0       	ldi	r31, 0x00	; 0
+ 1b0:	49 c0       	rjmp	.+146    	; 0x244 <DIO_SetPinDirection+0xb8>
+		Local_Copyu8_Actuall_Pin=PinNum-8;
+	}
+	else if ((PinNum<=pin23) && (PinNum>=pin16))
+	{
+		Local_Copyu8_Actuall_Pin=PinNum-16;
+	}else if ((PinNum<=pin31) && (PinNum>=pin24))
+ 1b2:	88 51       	subi	r24, 0x18	; 24
+ 1b4:	88 30       	cpi	r24, 0x08	; 8
+ 1b6:	40 f4       	brcc	.+16     	; 0x1c8 <DIO_SetPinDirection+0x3c>
+ 1b8:	0a c0       	rjmp	.+20     	; 0x1ce <DIO_SetPinDirection+0x42>
+}
+void DIO_SetPinDirection(uint8 PinNum,uint8 PinDirection){
+	GPIO* Local_Copy_Address=0;
+	if ((PinNum<=pin7) && (PinNum>=pin0))
+	{
+		Local_Copy_Address=GPIOA_DIO;
+ 1ba:	e9 e3       	ldi	r30, 0x39	; 57
+ 1bc:	f0 e0       	ldi	r31, 0x00	; 0
+ 1be:	07 c0       	rjmp	.+14     	; 0x1ce <DIO_SetPinDirection+0x42>
+	{
+		Local_Copyu8_Actuall_Pin=PinNum;
+	}
+	else if ((PinNum<=pin15) && (PinNum>=pin8))
+	{
+		Local_Copyu8_Actuall_Pin=PinNum-8;
+ 1c0:	89 2f       	mov	r24, r25
+	{
+		Local_Copy_Address=GPIOA_DIO;
+	}
+	else if ((PinNum<=pin15) && (PinNum>=pin8))
+	{
+		Local_Copy_Address=GPIOB_DIO;
+ 1c2:	e6 e3       	ldi	r30, 0x36	; 54
+ 1c4:	f0 e0       	ldi	r31, 0x00	; 0
+ 1c6:	03 c0       	rjmp	.+6      	; 0x1ce <DIO_SetPinDirection+0x42>
+}
+
+
+static void Apply_Dir(GPIO* Gpio,uint8 PinNum,uint8 PinDirection){
+	
+	uint8 Local_Copyu8_Actuall_Pin=0;
+ 1c8:	80 e0       	ldi	r24, 0x00	; 0
+ 1ca:	01 c0       	rjmp	.+2      	; 0x1ce <DIO_SetPinDirection+0x42>
+	{
+		Local_Copyu8_Actuall_Pin=PinNum-8;
+	}
+	else if ((PinNum<=pin23) && (PinNum>=pin16))
+	{
+		Local_Copyu8_Actuall_Pin=PinNum-16;
+ 1cc:	89 2f       	mov	r24, r25
+	}else if ((PinNum<=pin31) && (PinNum>=pin24))
+	{
+		Local_Copyu8_Actuall_Pin=PinNum-24;
+	}
+	switch(PinDirection){
+ 1ce:	61 30       	cpi	r22, 0x01	; 1
+ 1d0:	b1 f0       	breq	.+44     	; 0x1fe <DIO_SetPinDirection+0x72>
+ 1d2:	18 f0       	brcs	.+6      	; 0x1da <DIO_SetPinDirection+0x4e>
+ 1d4:	62 30       	cpi	r22, 0x02	; 2
+ 1d6:	21 f1       	breq	.+72     	; 0x220 <DIO_SetPinDirection+0x94>
+ 1d8:	08 95       	ret
+		case Input_PUll_UP:Clear_Bit(Gpio->DDR,Local_Copyu8_Actuall_Pin);Set_Bit(Gpio->PORT,Local_Copyu8_Actuall_Pin); break;
+ 1da:	21 e0       	ldi	r18, 0x01	; 1
+ 1dc:	30 e0       	ldi	r19, 0x00	; 0
+ 1de:	a9 01       	movw	r20, r18
+ 1e0:	02 c0       	rjmp	.+4      	; 0x1e6 <DIO_SetPinDirection+0x5a>
+ 1e2:	44 0f       	add	r20, r20
+ 1e4:	55 1f       	adc	r21, r21
+ 1e6:	8a 95       	dec	r24
+ 1e8:	e2 f7       	brpl	.-8      	; 0x1e2 <DIO_SetPinDirection+0x56>
+ 1ea:	ca 01       	movw	r24, r20
+ 1ec:	94 2f       	mov	r25, r20
+ 1ee:	90 95       	com	r25
+ 1f0:	21 81       	ldd	r18, Z+1	; 0x01
+ 1f2:	92 23       	and	r25, r18
+ 1f4:	91 83       	std	Z+1, r25	; 0x01
+ 1f6:	92 81       	ldd	r25, Z+2	; 0x02
+ 1f8:	89 2b       	or	r24, r25
+ 1fa:	82 83       	std	Z+2, r24	; 0x02
+ 1fc:	08 95       	ret
+		case INPUT_WITHOUT_PULL:Clear_Bit(Gpio->DDR,Local_Copyu8_Actuall_Pin);Clear_Bit(Gpio->PORT,Local_Copyu8_Actuall_Pin); break;
+ 1fe:	21 e0       	ldi	r18, 0x01	; 1
+ 200:	30 e0       	ldi	r19, 0x00	; 0
+ 202:	a9 01       	movw	r20, r18
+ 204:	02 c0       	rjmp	.+4      	; 0x20a <DIO_SetPinDirection+0x7e>
+ 206:	44 0f       	add	r20, r20
+ 208:	55 1f       	adc	r21, r21
+ 20a:	8a 95       	dec	r24
+ 20c:	e2 f7       	brpl	.-8      	; 0x206 <DIO_SetPinDirection+0x7a>
+ 20e:	ca 01       	movw	r24, r20
+ 210:	80 95       	com	r24
+ 212:	91 81       	ldd	r25, Z+1	; 0x01
+ 214:	98 23       	and	r25, r24
+ 216:	91 83       	std	Z+1, r25	; 0x01
+ 218:	92 81       	ldd	r25, Z+2	; 0x02
+ 21a:	89 23       	and	r24, r25
+ 21c:	82 83       	std	Z+2, r24	; 0x02
+ 21e:	08 95       	ret
+		case OUTPUT:Set_Bit(Gpio->DDR,Local_Copyu8_Actuall_Pin);break;
+ 220:	21 e0       	ldi	r18, 0x01	; 1
+ 222:	30 e0       	ldi	r19, 0x00	; 0
+ 224:	a9 01       	movw	r20, r18
+ 226:	02 c0       	rjmp	.+4      	; 0x22c <DIO_SetPinDirection+0xa0>
+ 228:	44 0f       	add	r20, r20
+ 22a:	55 1f       	adc	r21, r21
+ 22c:	8a 95       	dec	r24
+ 22e:	e2 f7       	brpl	.-8      	; 0x228 <DIO_SetPinDirection+0x9c>
+ 230:	ca 01       	movw	r24, r20
+ 232:	91 81       	ldd	r25, Z+1	; 0x01
+ 234:	89 2b       	or	r24, r25
+ 236:	81 83       	std	Z+1, r24	; 0x01
+		Local_Copy_Address=GPIOD_DIO;
+	}
+	
+	Apply_Dir(Local_Copy_Address,PinNum,PinDirection);
+	
+}
+ 238:	08 95       	ret
+	{
+		Local_Copy_Address=GPIOB_DIO;
+	}
+	else if ((PinNum<=pin23) && (PinNum>=pin16))
+	{
+		Local_Copy_Address=GPIOC_DIO;
+ 23a:	e3 e3       	ldi	r30, 0x33	; 51
+ 23c:	f0 e0       	ldi	r31, 0x00	; 0
+ 23e:	02 c0       	rjmp	.+4      	; 0x244 <DIO_SetPinDirection+0xb8>
+	return Get_Bit(Gpio->PIN,Local_Copyu8_Actuall_Pin);
+	
+	
+}
+void DIO_SetPinDirection(uint8 PinNum,uint8 PinDirection){
+	GPIO* Local_Copy_Address=0;
+ 240:	e0 e0       	ldi	r30, 0x00	; 0
+ 242:	f0 e0       	ldi	r31, 0x00	; 0
+	}
+	else if ((PinNum<=pin15) && (PinNum>=pin8))
+	{
+		Local_Copyu8_Actuall_Pin=PinNum-8;
+	}
+	else if ((PinNum<=pin23) && (PinNum>=pin16))
+ 244:	90 ef       	ldi	r25, 0xF0	; 240
+ 246:	98 0f       	add	r25, r24
+ 248:	98 30       	cpi	r25, 0x08	; 8
+ 24a:	08 f4       	brcc	.+2      	; 0x24e <DIO_SetPinDirection+0xc2>
+ 24c:	bf cf       	rjmp	.-130    	; 0x1cc <DIO_SetPinDirection+0x40>
+ 24e:	b1 cf       	rjmp	.-158    	; 0x1b2 <DIO_SetPinDirection+0x26>
+
+00000250 <Blink_leds>:
+
+   
+}
+void Blink_leds(){
+	
+	if (flag1==1)
+ 250:	80 91 62 00 	lds	r24, 0x0062	; 0x800062 <flag1>
+ 254:	81 30       	cpi	r24, 0x01	; 1
+ 256:	51 f4       	brne	.+20     	; 0x26c <Blink_leds+0x1c>
+	{
+		DIO_WritePin(pin13,High);
+ 258:	61 e0       	ldi	r22, 0x01	; 1
+ 25a:	8d e0       	ldi	r24, 0x0D	; 13
+ 25c:	0e 94 3e 00 	call	0x7c	; 0x7c <DIO_WritePin>
+		flag1=0;
+ 260:	10 92 62 00 	sts	0x0062, r1	; 0x800062 <flag1>
+		flag2=1;
+ 264:	81 e0       	ldi	r24, 0x01	; 1
+ 266:	80 93 61 00 	sts	0x0061, r24	; 0x800061 <flag2>
+ 26a:	04 c0       	rjmp	.+8      	; 0x274 <Blink_leds+0x24>
+	}
+	if (flag2==1)
+ 26c:	80 91 61 00 	lds	r24, 0x0061	; 0x800061 <flag2>
+ 270:	81 30       	cpi	r24, 0x01	; 1
+ 272:	69 f4       	brne	.+26     	; 0x28e <Blink_leds+0x3e>
+	{
+		DIO_WritePin(pin13,LOW);
+ 274:	60 e0       	ldi	r22, 0x00	; 0
+ 276:	8d e0       	ldi	r24, 0x0D	; 13
+ 278:	0e 94 3e 00 	call	0x7c	; 0x7c <DIO_WritePin>
+		DIO_WritePin(pin14,High);
+ 27c:	61 e0       	ldi	r22, 0x01	; 1
+ 27e:	8e e0       	ldi	r24, 0x0E	; 14
+ 280:	0e 94 3e 00 	call	0x7c	; 0x7c <DIO_WritePin>
+		flag2=0;
+ 284:	10 92 61 00 	sts	0x0061, r1	; 0x800061 <flag2>
+		flag3=0;
+ 288:	10 92 60 00 	sts	0x0060, r1	; 0x800060 <_edata>
+ 28c:	08 95       	ret
+	}
+	if (flag3==1)
+ 28e:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <_edata>
+ 292:	81 30       	cpi	r24, 0x01	; 1
+ 294:	69 f4       	brne	.+26     	; 0x2b0 <Blink_leds+0x60>
+	{
+		DIO_WritePin(pin13,LOW);
+ 296:	60 e0       	ldi	r22, 0x00	; 0
+ 298:	8d e0       	ldi	r24, 0x0D	; 13
+ 29a:	0e 94 3e 00 	call	0x7c	; 0x7c <DIO_WritePin>
+		DIO_WritePin(pin14,High);
+ 29e:	61 e0       	ldi	r22, 0x01	; 1
+ 2a0:	8e e0       	ldi	r24, 0x0E	; 14
+ 2a2:	0e 94 3e 00 	call	0x7c	; 0x7c <DIO_WritePin>
+		flag3=0;
+ 2a6:	10 92 60 00 	sts	0x0060, r1	; 0x800060 <_edata>
+		flag1=1;
+ 2aa:	81 e0       	ldi	r24, 0x01	; 1
+ 2ac:	80 93 62 00 	sts	0x0062, r24	; 0x800062 <flag1>
+ 2b0:	08 95       	ret
+
+000002b2 <External_test>:
+	
+}
+void External_test(){
+
+	
+	flag1=0;
+ 2b2:	10 92 62 00 	sts	0x0062, r1	; 0x800062 <flag1>
+	flag2=0;
+ 2b6:	10 92 61 00 	sts	0x0061, r1	; 0x800061 <flag2>
+	flag3=0;
+ 2ba:	10 92 60 00 	sts	0x0060, r1	; 0x800060 <_edata>
+	DIO_WritePin(pin13,High);
+ 2be:	61 e0       	ldi	r22, 0x01	; 1
+ 2c0:	8d e0       	ldi	r24, 0x0D	; 13
+ 2c2:	0e 94 3e 00 	call	0x7c	; 0x7c <DIO_WritePin>
+ 2c6:	08 95       	ret
+
+000002c8 <main>:
+void Blink_leds();
+void External_test();
+int main(void)
+{
+	/*SET LEDS direction as output*/
+	DIO_SetPinDirection(pin13,OUTPUT);
+ 2c8:	62 e0       	ldi	r22, 0x02	; 2
+ 2ca:	8d e0       	ldi	r24, 0x0D	; 13
+ 2cc:	0e 94 c6 00 	call	0x18c	; 0x18c <DIO_SetPinDirection>
+	DIO_SetPinDirection(pin14,OUTPUT);
+ 2d0:	62 e0       	ldi	r22, 0x02	; 2
+ 2d2:	8e e0       	ldi	r24, 0x0E	; 14
+ 2d4:	0e 94 c6 00 	call	0x18c	; 0x18c <DIO_SetPinDirection>
+	DIO_SetPinDirection(pin15,OUTPUT);
+ 2d8:	62 e0       	ldi	r22, 0x02	; 2
+ 2da:	8f e0       	ldi	r24, 0x0F	; 15
+ 2dc:	0e 94 c6 00 	call	0x18c	; 0x18c <DIO_SetPinDirection>
+	/* Initilaize timer0 */
+	Timer_Init();
+ 2e0:	0e 94 81 01 	call	0x302	; 0x302 <Timer_Init>
+	/*Initialize External Interrupt */
+	External_Interrupt_Init();
+ 2e4:	0e 94 96 01 	call	0x32c	; 0x32c <External_Interrupt_Init>
+	while (1)
+	{
+		Timer_delay(1000);	
+ 2e8:	88 ee       	ldi	r24, 0xE8	; 232
+ 2ea:	93 e0       	ldi	r25, 0x03	; 3
+ 2ec:	0e 94 a1 01 	call	0x342	; 0x342 <Timer_delay>
+	Set_CallBack(Blink_leds);
+ 2f0:	88 e2       	ldi	r24, 0x28	; 40
+ 2f2:	91 e0       	ldi	r25, 0x01	; 1
+ 2f4:	0e 94 a6 01 	call	0x34c	; 0x34c <Set_CallBack>
+	Set_External_CallBack(External_test);
+ 2f8:	89 e5       	ldi	r24, 0x59	; 89
+ 2fa:	91 e0       	ldi	r25, 0x01	; 1
+ 2fc:	0e 94 ab 01 	call	0x356	; 0x356 <Set_External_CallBack>
+ 300:	f3 cf       	rjmp	.-26     	; 0x2e8 <main+0x20>
+
+00000302 <Timer_Init>:
+	 timer_counter=n;
+ }
+ 
+ void Enable_Global_Interrupt(){
+	 /* Enable Global Interrupt */
+	 Set_Bit(STATUS_REG,NUM_SEVEN);
+ 302:	83 b7       	in	r24, 0x33	; 51
+ 304:	87 7f       	andi	r24, 0xF7	; 247
+ 306:	83 bf       	out	0x33, r24	; 51
+ 308:	83 b7       	in	r24, 0x33	; 51
+ 30a:	80 64       	ori	r24, 0x40	; 64
+ 30c:	83 bf       	out	0x33, r24	; 51
+ 30e:	83 b7       	in	r24, 0x33	; 51
+ 310:	81 60       	ori	r24, 0x01	; 1
+ 312:	83 bf       	out	0x33, r24	; 51
+ 314:	83 b7       	in	r24, 0x33	; 51
+ 316:	82 60       	ori	r24, 0x02	; 2
+ 318:	83 bf       	out	0x33, r24	; 51
+ 31a:	83 b7       	in	r24, 0x33	; 51
+ 31c:	8b 7f       	andi	r24, 0xFB	; 251
+ 31e:	83 bf       	out	0x33, r24	; 51
+ 320:	89 ef       	ldi	r24, 0xF9	; 249
+ 322:	8c bf       	out	0x3c, r24	; 60
+ 324:	89 b7       	in	r24, 0x39	; 57
+ 326:	82 60       	ori	r24, 0x02	; 2
+ 328:	89 bf       	out	0x39, r24	; 57
+ 32a:	08 95       	ret
+
+0000032c <External_Interrupt_Init>:
+ 32c:	61 e0       	ldi	r22, 0x01	; 1
+ 32e:	8a e0       	ldi	r24, 0x0A	; 10
+ 330:	0e 94 c6 00 	call	0x18c	; 0x18c <DIO_SetPinDirection>
+ 334:	84 b7       	in	r24, 0x34	; 52
+ 336:	80 64       	ori	r24, 0x40	; 64
+ 338:	84 bf       	out	0x34, r24	; 52
+ 33a:	8b b7       	in	r24, 0x3b	; 59
+ 33c:	80 62       	ori	r24, 0x20	; 32
+ 33e:	8b bf       	out	0x3b, r24	; 59
+ 340:	08 95       	ret
+
+00000342 <Timer_delay>:
+ 342:	90 93 64 00 	sts	0x0064, r25	; 0x800064 <timer_counter+0x1>
+ 346:	80 93 63 00 	sts	0x0063, r24	; 0x800063 <timer_counter>
+ 34a:	08 95       	ret
+
+0000034c <Set_CallBack>:
+	 
+ }
+ void Set_CallBack(void (*ptr)(void)){
+	 Call_Back=ptr;
+ 34c:	90 93 66 00 	sts	0x0066, r25	; 0x800066 <Call_Back+0x1>
+ 350:	80 93 65 00 	sts	0x0065, r24	; 0x800065 <Call_Back>
+ 354:	08 95       	ret
+
+00000356 <Set_External_CallBack>:
+	 
+ }
+ void Set_External_CallBack(void (*ptr)(void)){
+	 Call_Back_External=ptr;
+ 356:	90 93 68 00 	sts	0x0068, r25	; 0x800068 <Call_Back_External+0x1>
+ 35a:	80 93 67 00 	sts	0x0067, r24	; 0x800067 <Call_Back_External>
+ 35e:	08 95       	ret
+
+00000360 <__vector_10>:
+ }
+ ISR(TIMER0_COMP_vect){
+ 360:	1f 92       	push	r1
+ 362:	0f 92       	push	r0
+ 364:	0f b6       	in	r0, 0x3f	; 63
+ 366:	0f 92       	push	r0
+ 368:	11 24       	eor	r1, r1
+ 36a:	2f 93       	push	r18
+ 36c:	3f 93       	push	r19
+ 36e:	4f 93       	push	r20
+ 370:	5f 93       	push	r21
+ 372:	6f 93       	push	r22
+ 374:	7f 93       	push	r23
+ 376:	8f 93       	push	r24
+ 378:	9f 93       	push	r25
+ 37a:	af 93       	push	r26
+ 37c:	bf 93       	push	r27
+ 37e:	ef 93       	push	r30
+ 380:	ff 93       	push	r31
+	 uint32 i=0;
+	 if (i<timer_counter)
+ 382:	80 91 63 00 	lds	r24, 0x0063	; 0x800063 <timer_counter>
+ 386:	90 91 64 00 	lds	r25, 0x0064	; 0x800064 <timer_counter+0x1>
+ 38a:	89 2b       	or	r24, r25
+ 38c:	29 f4       	brne	.+10     	; 0x398 <__vector_10+0x38>
+	 {
+		 i++;
+	 }else{
+		 i=0;
+		 Call_Back();
+ 38e:	e0 91 65 00 	lds	r30, 0x0065	; 0x800065 <Call_Back>
+ 392:	f0 91 66 00 	lds	r31, 0x0066	; 0x800066 <Call_Back+0x1>
+ 396:	09 95       	icall
+		 
+	 }
+	 
+ }
+ 398:	ff 91       	pop	r31
+ 39a:	ef 91       	pop	r30
+ 39c:	bf 91       	pop	r27
+ 39e:	af 91       	pop	r26
+ 3a0:	9f 91       	pop	r25
+ 3a2:	8f 91       	pop	r24
+ 3a4:	7f 91       	pop	r23
+ 3a6:	6f 91       	pop	r22
+ 3a8:	5f 91       	pop	r21
+ 3aa:	4f 91       	pop	r20
+ 3ac:	3f 91       	pop	r19
+ 3ae:	2f 91       	pop	r18
+ 3b0:	0f 90       	pop	r0
+ 3b2:	0f be       	out	0x3f, r0	; 63
+ 3b4:	0f 90       	pop	r0
+ 3b6:	1f 90       	pop	r1
+ 3b8:	18 95       	reti
+
+000003ba <__vector_2>:
+ ISR(INT1_vect){
+ 3ba:	1f 92       	push	r1
+ 3bc:	0f 92       	push	r0
+ 3be:	0f b6       	in	r0, 0x3f	; 63
+ 3c0:	0f 92       	push	r0
+ 3c2:	11 24       	eor	r1, r1
+ 3c4:	2f 93       	push	r18
+ 3c6:	3f 93       	push	r19
+ 3c8:	4f 93       	push	r20
+ 3ca:	5f 93       	push	r21
+ 3cc:	6f 93       	push	r22
+ 3ce:	7f 93       	push	r23
+ 3d0:	8f 93       	push	r24
+ 3d2:	9f 93       	push	r25
+ 3d4:	af 93       	push	r26
+ 3d6:	bf 93       	push	r27
+ 3d8:	ef 93       	push	r30
+ 3da:	ff 93       	push	r31
+	 if (DIO_ReadPin(10))
+ 3dc:	8a e0       	ldi	r24, 0x0A	; 10
+ 3de:	0e 94 87 00 	call	0x10e	; 0x10e <DIO_ReadPin>
+ 3e2:	88 23       	and	r24, r24
+ 3e4:	29 f0       	breq	.+10     	; 0x3f0 <__vector_2+0x36>
+	 {
+		 Call_Back_External();
+ 3e6:	e0 91 67 00 	lds	r30, 0x0067	; 0x800067 <Call_Back_External>
+ 3ea:	f0 91 68 00 	lds	r31, 0x0068	; 0x800068 <Call_Back_External+0x1>
+ 3ee:	09 95       	icall
+	 }
+ 3f0:	ff 91       	pop	r31
+ 3f2:	ef 91       	pop	r30
+ 3f4:	bf 91       	pop	r27
+ 3f6:	af 91       	pop	r26
+ 3f8:	9f 91       	pop	r25
+ 3fa:	8f 91       	pop	r24
+ 3fc:	7f 91       	pop	r23
+ 3fe:	6f 91       	pop	r22
+ 400:	5f 91       	pop	r21
+ 402:	4f 91       	pop	r20
+ 404:	3f 91       	pop	r19
+ 406:	2f 91       	pop	r18
+ 408:	0f 90       	pop	r0
+ 40a:	0f be       	out	0x3f, r0	; 63
+ 40c:	0f 90       	pop	r0
+ 40e:	1f 90       	pop	r1
+ 410:	18 95       	reti
+
+00000412 <_exit>:
+ 412:	f8 94       	cli
+
+00000414 <__stop_program>:
+ 414:	ff cf       	rjmp	.-2      	; 0x414 <__stop_program>
