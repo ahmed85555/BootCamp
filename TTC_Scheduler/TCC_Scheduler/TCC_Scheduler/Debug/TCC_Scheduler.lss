@@ -1,0 +1,854 @@
+
+TCC_Scheduler.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000472  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000000  00800060  00800060  000004e6  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000025  00800060  00800060  000004e6  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  000004e6  2**0
+                  CONTENTS, READONLY
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000518  2**2
+                  CONTENTS, READONLY
+  5 .debug_aranges 000000e8  00000000  00000000  00000554  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   00000efe  00000000  00000000  0000063c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 000009a7  00000000  00000000  0000153a  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   000006da  00000000  00000000  00001ee1  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  000001b0  00000000  00000000  000025bc  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    00000512  00000000  00000000  0000276c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    000007d8  00000000  00000000  00002c7e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_ranges 00000110  00000000  00000000  00003456  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+   8:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+   c:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  10:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  14:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  18:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  1c:	0c 94 10 02 	jmp	0x420	; 0x420 <__vector_7>
+  20:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  24:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  28:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  2c:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  30:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  34:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  38:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  3c:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  40:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  44:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  48:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  4c:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+  50:	0c 94 3c 00 	jmp	0x78	; 0x78 <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_clear_bss>:
+  60:	20 e0       	ldi	r18, 0x00	; 0
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	01 c0       	rjmp	.+2      	; 0x6a <.do_clear_bss_start>
+
+00000068 <.do_clear_bss_loop>:
+  68:	1d 92       	st	X+, r1
+
+0000006a <.do_clear_bss_start>:
+  6a:	a5 38       	cpi	r26, 0x85	; 133
+  6c:	b2 07       	cpc	r27, r18
+  6e:	e1 f7       	brne	.-8      	; 0x68 <.do_clear_bss_loop>
+  70:	0e 94 ea 00 	call	0x1d4	; 0x1d4 <main>
+  74:	0c 94 37 02 	jmp	0x46e	; 0x46e <_exit>
+
+00000078 <__bad_interrupt>:
+  78:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+0000007c <DIO_WritePin>:
+	}
+	
+	return Apply_Read(Local_Copy_Address,PinNum);	
+	
+	
+}
+  7c:	88 30       	cpi	r24, 0x08	; 8
+  7e:	98 f0       	brcs	.+38     	; 0xa6 <DIO_WritePin+0x2a>
+  80:	98 ef       	ldi	r25, 0xF8	; 248
+  82:	98 0f       	add	r25, r24
+  84:	98 30       	cpi	r25, 0x08	; 8
+  86:	90 f0       	brcs	.+36     	; 0xac <DIO_WritePin+0x30>
+  88:	90 ef       	ldi	r25, 0xF0	; 240
+  8a:	98 0f       	add	r25, r24
+  8c:	98 30       	cpi	r25, 0x08	; 8
+  8e:	a0 f1       	brcs	.+104    	; 0xf8 <DIO_WritePin+0x7c>
+  90:	98 ee       	ldi	r25, 0xE8	; 232
+  92:	98 0f       	add	r25, r24
+  94:	98 30       	cpi	r25, 0x08	; 8
+  96:	98 f5       	brcc	.+102    	; 0xfe <DIO_WritePin+0x82>
+  98:	e0 e3       	ldi	r30, 0x30	; 48
+  9a:	f0 e0       	ldi	r31, 0x00	; 0
+  9c:	32 c0       	rjmp	.+100    	; 0x102 <DIO_WritePin+0x86>
+  9e:	88 51       	subi	r24, 0x18	; 24
+  a0:	88 30       	cpi	r24, 0x08	; 8
+  a2:	40 f4       	brcc	.+16     	; 0xb4 <DIO_WritePin+0x38>
+  a4:	0a c0       	rjmp	.+20     	; 0xba <DIO_WritePin+0x3e>
+  a6:	e9 e3       	ldi	r30, 0x39	; 57
+  a8:	f0 e0       	ldi	r31, 0x00	; 0
+  aa:	07 c0       	rjmp	.+14     	; 0xba <DIO_WritePin+0x3e>
+  ac:	89 2f       	mov	r24, r25
+  ae:	e6 e3       	ldi	r30, 0x36	; 54
+  b0:	f0 e0       	ldi	r31, 0x00	; 0
+  b2:	03 c0       	rjmp	.+6      	; 0xba <DIO_WritePin+0x3e>
+  b4:	80 e0       	ldi	r24, 0x00	; 0
+  b6:	01 c0       	rjmp	.+2      	; 0xba <DIO_WritePin+0x3e>
+  b8:	89 2f       	mov	r24, r25
+  ba:	66 23       	and	r22, r22
+  bc:	79 f0       	breq	.+30     	; 0xdc <DIO_WritePin+0x60>
+  be:	61 30       	cpi	r22, 0x01	; 1
+  c0:	29 f5       	brne	.+74     	; 0x10c <DIO_WritePin+0x90>
+  c2:	42 81       	ldd	r20, Z+2	; 0x02
+  c4:	21 e0       	ldi	r18, 0x01	; 1
+  c6:	30 e0       	ldi	r19, 0x00	; 0
+  c8:	b9 01       	movw	r22, r18
+  ca:	02 c0       	rjmp	.+4      	; 0xd0 <DIO_WritePin+0x54>
+  cc:	66 0f       	add	r22, r22
+  ce:	77 1f       	adc	r23, r23
+  d0:	8a 95       	dec	r24
+  d2:	e2 f7       	brpl	.-8      	; 0xcc <DIO_WritePin+0x50>
+  d4:	cb 01       	movw	r24, r22
+  d6:	84 2b       	or	r24, r20
+  d8:	82 83       	std	Z+2, r24	; 0x02
+  da:	08 95       	ret
+  dc:	42 81       	ldd	r20, Z+2	; 0x02
+  de:	21 e0       	ldi	r18, 0x01	; 1
+  e0:	30 e0       	ldi	r19, 0x00	; 0
+  e2:	b9 01       	movw	r22, r18
+  e4:	02 c0       	rjmp	.+4      	; 0xea <DIO_WritePin+0x6e>
+  e6:	66 0f       	add	r22, r22
+  e8:	77 1f       	adc	r23, r23
+  ea:	8a 95       	dec	r24
+  ec:	e2 f7       	brpl	.-8      	; 0xe6 <DIO_WritePin+0x6a>
+  ee:	cb 01       	movw	r24, r22
+  f0:	80 95       	com	r24
+  f2:	84 23       	and	r24, r20
+  f4:	82 83       	std	Z+2, r24	; 0x02
+  f6:	08 95       	ret
+  f8:	e3 e3       	ldi	r30, 0x33	; 51
+  fa:	f0 e0       	ldi	r31, 0x00	; 0
+  fc:	02 c0       	rjmp	.+4      	; 0x102 <DIO_WritePin+0x86>
+  fe:	e0 e0       	ldi	r30, 0x00	; 0
+ 100:	f0 e0       	ldi	r31, 0x00	; 0
+ 102:	90 ef       	ldi	r25, 0xF0	; 240
+ 104:	98 0f       	add	r25, r24
+ 106:	98 30       	cpi	r25, 0x08	; 8
+ 108:	b8 f2       	brcs	.-82     	; 0xb8 <DIO_WritePin+0x3c>
+ 10a:	c9 cf       	rjmp	.-110    	; 0x9e <DIO_WritePin+0x22>
+ 10c:	08 95       	ret
+
+0000010e <DIO_SetPinDirection>:
+	
+	
+}
+void DIO_SetPinDirection(uint8 PinNum,uint8 PinDirection){
+	GPIO* Local_Copy_Address=0;
+	if ((PinNum<=pin7) && (PinNum>=pin0))
+ 10e:	88 30       	cpi	r24, 0x08	; 8
+ 110:	a8 f0       	brcs	.+42     	; 0x13c <DIO_SetPinDirection+0x2e>
+	{
+		Local_Copy_Address=GPIOA_DIO;
+	}
+	else if ((PinNum<=pin15) && (PinNum>=pin8))
+ 112:	98 ef       	ldi	r25, 0xF8	; 248
+ 114:	98 0f       	add	r25, r24
+ 116:	98 30       	cpi	r25, 0x08	; 8
+ 118:	a0 f0       	brcs	.+40     	; 0x142 <DIO_SetPinDirection+0x34>
+	{
+		Local_Copy_Address=GPIOB_DIO;
+	}
+	else if ((PinNum<=pin23) && (PinNum>=pin16))
+ 11a:	90 ef       	ldi	r25, 0xF0	; 240
+ 11c:	98 0f       	add	r25, r24
+ 11e:	98 30       	cpi	r25, 0x08	; 8
+ 120:	08 f4       	brcc	.+2      	; 0x124 <DIO_SetPinDirection+0x16>
+ 122:	4d c0       	rjmp	.+154    	; 0x1be <DIO_SetPinDirection+0xb0>
+	{
+		Local_Copy_Address=GPIOC_DIO;
+	}else if ((PinNum<=pin31) && (PinNum>=pin24))
+ 124:	98 ee       	ldi	r25, 0xE8	; 232
+ 126:	98 0f       	add	r25, r24
+ 128:	98 30       	cpi	r25, 0x08	; 8
+ 12a:	08 f0       	brcs	.+2      	; 0x12e <DIO_SetPinDirection+0x20>
+ 12c:	4b c0       	rjmp	.+150    	; 0x1c4 <DIO_SetPinDirection+0xb6>
+	{
+		Local_Copy_Address=GPIOD_DIO;
+ 12e:	e0 e3       	ldi	r30, 0x30	; 48
+ 130:	f0 e0       	ldi	r31, 0x00	; 0
+ 132:	4a c0       	rjmp	.+148    	; 0x1c8 <DIO_SetPinDirection+0xba>
+		Local_Copyu8_Actuall_Pin=PinNum-8;
+	}
+	else if ((PinNum<=pin23) && (PinNum>=pin16))
+	{
+		Local_Copyu8_Actuall_Pin=PinNum-16;
+	}else if ((PinNum<=pin31) && (PinNum>=pin24))
+ 134:	88 51       	subi	r24, 0x18	; 24
+ 136:	88 30       	cpi	r24, 0x08	; 8
+ 138:	40 f4       	brcc	.+16     	; 0x14a <DIO_SetPinDirection+0x3c>
+ 13a:	0a c0       	rjmp	.+20     	; 0x150 <DIO_SetPinDirection+0x42>
+}
+void DIO_SetPinDirection(uint8 PinNum,uint8 PinDirection){
+	GPIO* Local_Copy_Address=0;
+	if ((PinNum<=pin7) && (PinNum>=pin0))
+	{
+		Local_Copy_Address=GPIOA_DIO;
+ 13c:	e9 e3       	ldi	r30, 0x39	; 57
+ 13e:	f0 e0       	ldi	r31, 0x00	; 0
+ 140:	07 c0       	rjmp	.+14     	; 0x150 <DIO_SetPinDirection+0x42>
+	{
+		Local_Copyu8_Actuall_Pin=PinNum;
+	}
+	else if ((PinNum<=pin15) && (PinNum>=pin8))
+	{
+		Local_Copyu8_Actuall_Pin=PinNum-8;
+ 142:	89 2f       	mov	r24, r25
+	{
+		Local_Copy_Address=GPIOA_DIO;
+	}
+	else if ((PinNum<=pin15) && (PinNum>=pin8))
+	{
+		Local_Copy_Address=GPIOB_DIO;
+ 144:	e6 e3       	ldi	r30, 0x36	; 54
+ 146:	f0 e0       	ldi	r31, 0x00	; 0
+ 148:	03 c0       	rjmp	.+6      	; 0x150 <DIO_SetPinDirection+0x42>
+}
+
+
+static void Apply_Dir(GPIO* Gpio,uint8 PinNum,uint8 PinDirection){
+	
+	uint8 Local_Copyu8_Actuall_Pin=0;
+ 14a:	80 e0       	ldi	r24, 0x00	; 0
+ 14c:	01 c0       	rjmp	.+2      	; 0x150 <DIO_SetPinDirection+0x42>
+	{
+		Local_Copyu8_Actuall_Pin=PinNum-8;
+	}
+	else if ((PinNum<=pin23) && (PinNum>=pin16))
+	{
+		Local_Copyu8_Actuall_Pin=PinNum-16;
+ 14e:	89 2f       	mov	r24, r25
+	}else if ((PinNum<=pin31) && (PinNum>=pin24))
+	{
+		Local_Copyu8_Actuall_Pin=PinNum-24;
+	}
+	switch(PinDirection){
+ 150:	61 30       	cpi	r22, 0x01	; 1
+ 152:	b1 f0       	breq	.+44     	; 0x180 <DIO_SetPinDirection+0x72>
+ 154:	18 f0       	brcs	.+6      	; 0x15c <DIO_SetPinDirection+0x4e>
+ 156:	62 30       	cpi	r22, 0x02	; 2
+ 158:	29 f1       	breq	.+74     	; 0x1a4 <DIO_SetPinDirection+0x96>
+ 15a:	08 95       	ret
+		case Input_PUll_UP:Clear_Bit(Gpio->DDR,Local_Copyu8_Actuall_Pin);Set_Bit(Gpio->PORT,Local_Copyu8_Actuall_Pin); break;
+ 15c:	41 81       	ldd	r20, Z+1	; 0x01
+ 15e:	21 e0       	ldi	r18, 0x01	; 1
+ 160:	30 e0       	ldi	r19, 0x00	; 0
+ 162:	b9 01       	movw	r22, r18
+ 164:	02 c0       	rjmp	.+4      	; 0x16a <DIO_SetPinDirection+0x5c>
+ 166:	66 0f       	add	r22, r22
+ 168:	77 1f       	adc	r23, r23
+ 16a:	8a 95       	dec	r24
+ 16c:	e2 f7       	brpl	.-8      	; 0x166 <DIO_SetPinDirection+0x58>
+ 16e:	cb 01       	movw	r24, r22
+ 170:	96 2f       	mov	r25, r22
+ 172:	90 95       	com	r25
+ 174:	94 23       	and	r25, r20
+ 176:	91 83       	std	Z+1, r25	; 0x01
+ 178:	92 81       	ldd	r25, Z+2	; 0x02
+ 17a:	89 2b       	or	r24, r25
+ 17c:	82 83       	std	Z+2, r24	; 0x02
+ 17e:	08 95       	ret
+		case INPUT_WITHOUT_PULL:Clear_Bit(Gpio->DDR,Local_Copyu8_Actuall_Pin);Clear_Bit(Gpio->PORT,Local_Copyu8_Actuall_Pin); break;
+ 180:	41 81       	ldd	r20, Z+1	; 0x01
+ 182:	21 e0       	ldi	r18, 0x01	; 1
+ 184:	30 e0       	ldi	r19, 0x00	; 0
+ 186:	b9 01       	movw	r22, r18
+ 188:	02 c0       	rjmp	.+4      	; 0x18e <DIO_SetPinDirection+0x80>
+ 18a:	66 0f       	add	r22, r22
+ 18c:	77 1f       	adc	r23, r23
+ 18e:	8a 95       	dec	r24
+ 190:	e2 f7       	brpl	.-8      	; 0x18a <DIO_SetPinDirection+0x7c>
+ 192:	cb 01       	movw	r24, r22
+ 194:	80 95       	com	r24
+ 196:	94 2f       	mov	r25, r20
+ 198:	98 23       	and	r25, r24
+ 19a:	91 83       	std	Z+1, r25	; 0x01
+ 19c:	92 81       	ldd	r25, Z+2	; 0x02
+ 19e:	89 23       	and	r24, r25
+ 1a0:	82 83       	std	Z+2, r24	; 0x02
+ 1a2:	08 95       	ret
+		case OUTPUT:Set_Bit(Gpio->DDR,Local_Copyu8_Actuall_Pin);break;
+ 1a4:	41 81       	ldd	r20, Z+1	; 0x01
+ 1a6:	21 e0       	ldi	r18, 0x01	; 1
+ 1a8:	30 e0       	ldi	r19, 0x00	; 0
+ 1aa:	b9 01       	movw	r22, r18
+ 1ac:	02 c0       	rjmp	.+4      	; 0x1b2 <DIO_SetPinDirection+0xa4>
+ 1ae:	66 0f       	add	r22, r22
+ 1b0:	77 1f       	adc	r23, r23
+ 1b2:	8a 95       	dec	r24
+ 1b4:	e2 f7       	brpl	.-8      	; 0x1ae <DIO_SetPinDirection+0xa0>
+ 1b6:	cb 01       	movw	r24, r22
+ 1b8:	84 2b       	or	r24, r20
+ 1ba:	81 83       	std	Z+1, r24	; 0x01
+		Local_Copy_Address=GPIOD_DIO;
+	}
+	
+	Apply_Dir(Local_Copy_Address,PinNum,PinDirection);
+	
+}
+ 1bc:	08 95       	ret
+	{
+		Local_Copy_Address=GPIOB_DIO;
+	}
+	else if ((PinNum<=pin23) && (PinNum>=pin16))
+	{
+		Local_Copy_Address=GPIOC_DIO;
+ 1be:	e3 e3       	ldi	r30, 0x33	; 51
+ 1c0:	f0 e0       	ldi	r31, 0x00	; 0
+ 1c2:	02 c0       	rjmp	.+4      	; 0x1c8 <DIO_SetPinDirection+0xba>
+	return Get_Bit(Gpio->PIN,Local_Copyu8_Actuall_Pin);
+	
+	
+}
+void DIO_SetPinDirection(uint8 PinNum,uint8 PinDirection){
+	GPIO* Local_Copy_Address=0;
+ 1c4:	e0 e0       	ldi	r30, 0x00	; 0
+ 1c6:	f0 e0       	ldi	r31, 0x00	; 0
+	}
+	else if ((PinNum<=pin15) && (PinNum>=pin8))
+	{
+		Local_Copyu8_Actuall_Pin=PinNum-8;
+	}
+	else if ((PinNum<=pin23) && (PinNum>=pin16))
+ 1c8:	90 ef       	ldi	r25, 0xF0	; 240
+ 1ca:	98 0f       	add	r25, r24
+ 1cc:	98 30       	cpi	r25, 0x08	; 8
+ 1ce:	08 f4       	brcc	.+2      	; 0x1d2 <DIO_SetPinDirection+0xc4>
+ 1d0:	be cf       	rjmp	.-132    	; 0x14e <DIO_SetPinDirection+0x40>
+ 1d2:	b0 cf       	rjmp	.-160    	; 0x134 <DIO_SetPinDirection+0x26>
+
+000001d4 <main>:
+#include "Task.h"
+#include "DIO_Interface.h"
+#include "Task.h"
+
+int main(void)
+{
+ 1d4:	cf 93       	push	r28
+ 1d6:	df 93       	push	r29
+ 1d8:	cd b7       	in	r28, 0x3d	; 61
+ 1da:	de b7       	in	r29, 0x3e	; 62
+ 1dc:	60 97       	sbiw	r28, 0x10	; 16
+ 1de:	0f b6       	in	r0, 0x3f	; 63
+ 1e0:	f8 94       	cli
+ 1e2:	de bf       	out	0x3e, r29	; 62
+ 1e4:	0f be       	out	0x3f, r0	; 63
+ 1e6:	cd bf       	out	0x3d, r28	; 61
+	
+   	/* initialize pins 12 and 13 and 14 on portB.4 and portB.5 and portB.6 to be output */
+   	DIO_SetPinDirection(pin12,OUTPUT);
+ 1e8:	62 e0       	ldi	r22, 0x02	; 2
+ 1ea:	8c e0       	ldi	r24, 0x0C	; 12
+ 1ec:	0e 94 87 00 	call	0x10e	; 0x10e <DIO_SetPinDirection>
+   	DIO_SetPinDirection(pin13,OUTPUT);
+ 1f0:	62 e0       	ldi	r22, 0x02	; 2
+ 1f2:	8d e0       	ldi	r24, 0x0D	; 13
+ 1f4:	0e 94 87 00 	call	0x10e	; 0x10e <DIO_SetPinDirection>
+   	DIO_SetPinDirection(pin14,OUTPUT);
+ 1f8:	62 e0       	ldi	r22, 0x02	; 2
+ 1fa:	8e e0       	ldi	r24, 0x0E	; 14
+ 1fc:	0e 94 87 00 	call	0x10e	; 0x10e <DIO_SetPinDirection>
+	/*Initilaize Scheduler*/
+    Scheduler_Init();
+ 200:	0e 94 2b 01 	call	0x256	; 0x256 <Scheduler_Init>
+	/*Task one attributes */
+	TCB Task1;
+	Task1.task=led1_task;
+ 204:	83 ed       	ldi	r24, 0xD3	; 211
+ 206:	91 e0       	ldi	r25, 0x01	; 1
+ 208:	9a 83       	std	Y+2, r25	; 0x02
+ 20a:	89 83       	std	Y+1, r24	; 0x01
+	Task1.Periodicity=1500;
+ 20c:	8c ed       	ldi	r24, 0xDC	; 220
+ 20e:	95 e0       	ldi	r25, 0x05	; 5
+ 210:	9c 83       	std	Y+4, r25	; 0x04
+ 212:	8b 83       	std	Y+3, r24	; 0x03
+	/*Create Task one*/
+	Scheduler_Add_Task(&Task1);
+ 214:	ce 01       	movw	r24, r28
+ 216:	01 96       	adiw	r24, 0x01	; 1
+ 218:	0e 94 78 01 	call	0x2f0	; 0x2f0 <Scheduler_Add_Task>
+	/*Task Two attributes */
+	TCB Task2;
+	Task2.task=led2_task;
+ 21c:	80 ee       	ldi	r24, 0xE0	; 224
+ 21e:	91 e0       	ldi	r25, 0x01	; 1
+ 220:	9a 87       	std	Y+10, r25	; 0x0a
+ 222:	89 87       	std	Y+9, r24	; 0x09
+	Task2.Periodicity=2000;
+ 224:	80 ed       	ldi	r24, 0xD0	; 208
+ 226:	97 e0       	ldi	r25, 0x07	; 7
+ 228:	9c 87       	std	Y+12, r25	; 0x0c
+ 22a:	8b 87       	std	Y+11, r24	; 0x0b
+	/*Create Task Two*/
+	Scheduler_Add_Task(&Task2);
+ 22c:	ce 01       	movw	r24, r28
+ 22e:	09 96       	adiw	r24, 0x09	; 9
+ 230:	0e 94 78 01 	call	0x2f0	; 0x2f0 <Scheduler_Add_Task>
+	Scheduler_Start();
+ 234:	0e 94 69 01 	call	0x2d2	; 0x2d2 <Scheduler_Start>
+
+}
+ 238:	80 e0       	ldi	r24, 0x00	; 0
+ 23a:	90 e0       	ldi	r25, 0x00	; 0
+ 23c:	60 96       	adiw	r28, 0x10	; 16
+ 23e:	0f b6       	in	r0, 0x3f	; 63
+ 240:	f8 94       	cli
+ 242:	de bf       	out	0x3e, r29	; 62
+ 244:	0f be       	out	0x3f, r0	; 63
+ 246:	cd bf       	out	0x3d, r28	; 61
+ 248:	df 91       	pop	r29
+ 24a:	cf 91       	pop	r28
+ 24c:	08 95       	ret
+
+0000024e <set_flag>:
+*  OUTPUT:NOTHING
+* Description: This function Sets flag with one with every tick 
+
+****************************************************************************/
+static void set_flag(){
+	flag=NUM_ONE;
+ 24e:	81 e0       	ldi	r24, 0x01	; 1
+ 250:	80 93 62 00 	sts	0x0062, r24	; 0x800062 <flag>
+ 254:	08 95       	ret
+
+00000256 <Scheduler_Init>:
+* Description: This function Initilaize timer and initilaize set_callback
+* to call set_flag in the isr every tick time and check on the flag to call scheduler
+
+****************************************************************************/
+void Scheduler_Init() 
+{
+ 256:	e3 e6       	ldi	r30, 0x63	; 99
+ 258:	f0 e0       	ldi	r31, 0x00	; 0
+ 25a:	83 e8       	ldi	r24, 0x83	; 131
+ 25c:	90 e0       	ldi	r25, 0x00	; 0
+	uint32 i=0;
+	for (i=0;i<MAX_SIZE;i++)
+	{
+		System_Tasks[i].task=NULL;
+ 25e:	11 82       	std	Z+1, r1	; 0x01
+ 260:	10 82       	st	Z, r1
+		System_Tasks[i].Periodicity=0;
+ 262:	13 82       	std	Z+3, r1	; 0x03
+ 264:	12 82       	std	Z+2, r1	; 0x02
+		System_Tasks[i].Delay=0;
+ 266:	17 82       	std	Z+7, r1	; 0x07
+ 268:	16 82       	std	Z+6, r1	; 0x06
+		System_Tasks[i].Priority=0;
+ 26a:	15 82       	std	Z+5, r1	; 0x05
+ 26c:	14 82       	std	Z+4, r1	; 0x04
+ 26e:	38 96       	adiw	r30, 0x08	; 8
+
+****************************************************************************/
+void Scheduler_Init() 
+{
+	uint32 i=0;
+	for (i=0;i<MAX_SIZE;i++)
+ 270:	e8 17       	cp	r30, r24
+ 272:	f9 07       	cpc	r31, r25
+ 274:	a1 f7       	brne	.-24     	; 0x25e <Scheduler_Init+0x8>
+		System_Tasks[i].Delay=0;
+		System_Tasks[i].Priority=0;
+	}
+	
+	
+}
+ 276:	08 95       	ret
+
+00000278 <TTC_Scheduler>:
+*  INPUT:NOTHING
+*  OUTPUT:NOTHING
+* Description: This function Called every tick to execute the tasks sequentially 
+
+****************************************************************************/
+void TTC_Scheduler(){
+ 278:	0f 93       	push	r16
+ 27a:	1f 93       	push	r17
+ 27c:	cf 93       	push	r28
+ 27e:	df 93       	push	r29
+	
+	uint32 i=NUM_ZERO;
+	
+	for (i=NUM_ZERO;i<size;i++)
+ 280:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <_edata>
+ 284:	90 91 61 00 	lds	r25, 0x0061	; 0x800061 <_edata+0x1>
+ 288:	89 2b       	or	r24, r25
+ 28a:	f1 f0       	breq	.+60     	; 0x2c8 <TTC_Scheduler+0x50>
+ 28c:	c3 e6       	ldi	r28, 0x63	; 99
+ 28e:	d0 e0       	ldi	r29, 0x00	; 0
+ 290:	00 e0       	ldi	r16, 0x00	; 0
+ 292:	10 e0       	ldi	r17, 0x00	; 0
+	{
+	if(NUM_ZERO==(System_Tasks[i].Delay--))
+ 294:	8e 81       	ldd	r24, Y+6	; 0x06
+ 296:	9f 81       	ldd	r25, Y+7	; 0x07
+ 298:	9c 01       	movw	r18, r24
+ 29a:	21 50       	subi	r18, 0x01	; 1
+ 29c:	31 09       	sbc	r19, r1
+ 29e:	3f 83       	std	Y+7, r19	; 0x07
+ 2a0:	2e 83       	std	Y+6, r18	; 0x06
+ 2a2:	89 2b       	or	r24, r25
+ 2a4:	39 f4       	brne	.+14     	; 0x2b4 <TTC_Scheduler+0x3c>
+	{
+		System_Tasks[i].task();
+ 2a6:	e8 81       	ld	r30, Y
+ 2a8:	f9 81       	ldd	r31, Y+1	; 0x01
+ 2aa:	09 95       	icall
+		System_Tasks[i].Delay=System_Tasks[i].Periodicity;
+ 2ac:	8a 81       	ldd	r24, Y+2	; 0x02
+ 2ae:	9b 81       	ldd	r25, Y+3	; 0x03
+ 2b0:	9f 83       	std	Y+7, r25	; 0x07
+ 2b2:	8e 83       	std	Y+6, r24	; 0x06
+****************************************************************************/
+void TTC_Scheduler(){
+	
+	uint32 i=NUM_ZERO;
+	
+	for (i=NUM_ZERO;i<size;i++)
+ 2b4:	0f 5f       	subi	r16, 0xFF	; 255
+ 2b6:	1f 4f       	sbci	r17, 0xFF	; 255
+ 2b8:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <_edata>
+ 2bc:	90 91 61 00 	lds	r25, 0x0061	; 0x800061 <_edata+0x1>
+ 2c0:	28 96       	adiw	r28, 0x08	; 8
+ 2c2:	08 17       	cp	r16, r24
+ 2c4:	19 07       	cpc	r17, r25
+ 2c6:	30 f3       	brcs	.-52     	; 0x294 <TTC_Scheduler+0x1c>
+	{
+		System_Tasks[i].task();
+		System_Tasks[i].Delay=System_Tasks[i].Periodicity;
+	}
+	}
+}
+ 2c8:	df 91       	pop	r29
+ 2ca:	cf 91       	pop	r28
+ 2cc:	1f 91       	pop	r17
+ 2ce:	0f 91       	pop	r16
+ 2d0:	08 95       	ret
+
+000002d2 <Scheduler_Start>:
+*  OUTPUT:NOTHING
+* Description: This function Starts The Scheduler 
+
+****************************************************************************/
+void Scheduler_Start(){
+	Timer_Init();
+ 2d2:	0e 94 ed 01 	call	0x3da	; 0x3da <Timer_Init>
+	Set_CallBack(set_flag);
+ 2d6:	87 e2       	ldi	r24, 0x27	; 39
+ 2d8:	91 e0       	ldi	r25, 0x01	; 1
+ 2da:	0e 94 0b 02 	call	0x416	; 0x416 <Set_CallBack>
+	while (1)
+	{
+		if (flag==NUM_ONE)
+ 2de:	80 91 62 00 	lds	r24, 0x0062	; 0x800062 <flag>
+ 2e2:	81 30       	cpi	r24, 0x01	; 1
+ 2e4:	e1 f7       	brne	.-8      	; 0x2de <Scheduler_Start+0xc>
+		{
+			flag=NUM_ZERO;
+ 2e6:	10 92 62 00 	sts	0x0062, r1	; 0x800062 <flag>
+			TTC_Scheduler();
+ 2ea:	0e 94 3c 01 	call	0x278	; 0x278 <TTC_Scheduler>
+ 2ee:	f7 cf       	rjmp	.-18     	; 0x2de <Scheduler_Start+0xc>
+
+000002f0 <Scheduler_Add_Task>:
+*  INPUT:Pointer To Function
+*  OUTPUT:NOTHING
+* Description: This function Adds task to the array of tasks
+
+****************************************************************************/
+uint8 Scheduler_Add_Task(TCB* Task){
+ 2f0:	dc 01       	movw	r26, r24
+	
+	if(size<MAX_SIZE){
+ 2f2:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <_edata>
+ 2f6:	90 91 61 00 	lds	r25, 0x0061	; 0x800061 <_edata+0x1>
+ 2fa:	04 97       	sbiw	r24, 0x04	; 4
+ 2fc:	08 f0       	brcs	.+2      	; 0x300 <Scheduler_Add_Task+0x10>
+ 2fe:	51 c0       	rjmp	.+162    	; 0x3a2 <Scheduler_Add_Task+0xb2>
+		System_Tasks[size].task=Task->task;
+ 300:	e0 91 60 00 	lds	r30, 0x0060	; 0x800060 <_edata>
+ 304:	f0 91 61 00 	lds	r31, 0x0061	; 0x800061 <_edata+0x1>
+ 308:	8d 91       	ld	r24, X+
+ 30a:	9c 91       	ld	r25, X
+ 30c:	11 97       	sbiw	r26, 0x01	; 1
+ 30e:	ee 0f       	add	r30, r30
+ 310:	ff 1f       	adc	r31, r31
+ 312:	ee 0f       	add	r30, r30
+ 314:	ff 1f       	adc	r31, r31
+ 316:	ee 0f       	add	r30, r30
+ 318:	ff 1f       	adc	r31, r31
+ 31a:	ed 59       	subi	r30, 0x9D	; 157
+ 31c:	ff 4f       	sbci	r31, 0xFF	; 255
+ 31e:	91 83       	std	Z+1, r25	; 0x01
+ 320:	80 83       	st	Z, r24
+		System_Tasks[size].Periodicity=Task->Periodicity;
+ 322:	e0 91 60 00 	lds	r30, 0x0060	; 0x800060 <_edata>
+ 326:	f0 91 61 00 	lds	r31, 0x0061	; 0x800061 <_edata+0x1>
+ 32a:	12 96       	adiw	r26, 0x02	; 2
+ 32c:	8d 91       	ld	r24, X+
+ 32e:	9c 91       	ld	r25, X
+ 330:	13 97       	sbiw	r26, 0x03	; 3
+ 332:	ee 0f       	add	r30, r30
+ 334:	ff 1f       	adc	r31, r31
+ 336:	ee 0f       	add	r30, r30
+ 338:	ff 1f       	adc	r31, r31
+ 33a:	ee 0f       	add	r30, r30
+ 33c:	ff 1f       	adc	r31, r31
+ 33e:	ed 59       	subi	r30, 0x9D	; 157
+ 340:	ff 4f       	sbci	r31, 0xFF	; 255
+ 342:	93 83       	std	Z+3, r25	; 0x03
+ 344:	82 83       	std	Z+2, r24	; 0x02
+		System_Tasks[size].Delay=Task->Periodicity;
+ 346:	e0 91 60 00 	lds	r30, 0x0060	; 0x800060 <_edata>
+ 34a:	f0 91 61 00 	lds	r31, 0x0061	; 0x800061 <_edata+0x1>
+ 34e:	12 96       	adiw	r26, 0x02	; 2
+ 350:	8d 91       	ld	r24, X+
+ 352:	9c 91       	ld	r25, X
+ 354:	13 97       	sbiw	r26, 0x03	; 3
+ 356:	ee 0f       	add	r30, r30
+ 358:	ff 1f       	adc	r31, r31
+ 35a:	ee 0f       	add	r30, r30
+ 35c:	ff 1f       	adc	r31, r31
+ 35e:	ee 0f       	add	r30, r30
+ 360:	ff 1f       	adc	r31, r31
+ 362:	ed 59       	subi	r30, 0x9D	; 157
+ 364:	ff 4f       	sbci	r31, 0xFF	; 255
+ 366:	97 83       	std	Z+7, r25	; 0x07
+ 368:	86 83       	std	Z+6, r24	; 0x06
+		System_Tasks[size].Priority=Task->Priority;
+ 36a:	e0 91 60 00 	lds	r30, 0x0060	; 0x800060 <_edata>
+ 36e:	f0 91 61 00 	lds	r31, 0x0061	; 0x800061 <_edata+0x1>
+ 372:	14 96       	adiw	r26, 0x04	; 4
+ 374:	8d 91       	ld	r24, X+
+ 376:	9c 91       	ld	r25, X
+ 378:	15 97       	sbiw	r26, 0x05	; 5
+ 37a:	ee 0f       	add	r30, r30
+ 37c:	ff 1f       	adc	r31, r31
+ 37e:	ee 0f       	add	r30, r30
+ 380:	ff 1f       	adc	r31, r31
+ 382:	ee 0f       	add	r30, r30
+ 384:	ff 1f       	adc	r31, r31
+ 386:	ed 59       	subi	r30, 0x9D	; 157
+ 388:	ff 4f       	sbci	r31, 0xFF	; 255
+ 38a:	95 83       	std	Z+5, r25	; 0x05
+ 38c:	84 83       	std	Z+4, r24	; 0x04
+		size++;
+ 38e:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <_edata>
+ 392:	90 91 61 00 	lds	r25, 0x0061	; 0x800061 <_edata+0x1>
+ 396:	01 96       	adiw	r24, 0x01	; 1
+ 398:	90 93 61 00 	sts	0x0061, r25	; 0x800061 <_edata+0x1>
+ 39c:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <_edata>
+		
+	}else{
+		return 0;
+	}
+	
+}
+ 3a0:	08 95       	ret
+		System_Tasks[size].Delay=Task->Periodicity;
+		System_Tasks[size].Priority=Task->Priority;
+		size++;
+		
+	}else{
+		return 0;
+ 3a2:	80 e0       	ldi	r24, 0x00	; 0
+	}
+	
+}
+ 3a4:	08 95       	ret
+
+000003a6 <led1_task>:
+
+
+	/*Task Number one */
+void led1_task(){
+ 
+	DIO_WritePin(pin12,High);
+ 3a6:	61 e0       	ldi	r22, 0x01	; 1
+ 3a8:	8c e0       	ldi	r24, 0x0C	; 12
+ 3aa:	0e 94 3e 00 	call	0x7c	; 0x7c <DIO_WritePin>
+	DIO_WritePin(pin13,High);
+ 3ae:	61 e0       	ldi	r22, 0x01	; 1
+ 3b0:	8d e0       	ldi	r24, 0x0D	; 13
+ 3b2:	0e 94 3e 00 	call	0x7c	; 0x7c <DIO_WritePin>
+	DIO_WritePin(pin14,High);
+ 3b6:	61 e0       	ldi	r22, 0x01	; 1
+ 3b8:	8e e0       	ldi	r24, 0x0E	; 14
+ 3ba:	0e 94 3e 00 	call	0x7c	; 0x7c <DIO_WritePin>
+ 3be:	08 95       	ret
+
+000003c0 <led2_task>:
+}
+/*Task Number TWo */
+
+void led2_task(){
+
+	DIO_WritePin(pin12,LOW);
+ 3c0:	60 e0       	ldi	r22, 0x00	; 0
+ 3c2:	8c e0       	ldi	r24, 0x0C	; 12
+ 3c4:	0e 94 3e 00 	call	0x7c	; 0x7c <DIO_WritePin>
+	DIO_WritePin(pin13,LOW);
+ 3c8:	60 e0       	ldi	r22, 0x00	; 0
+ 3ca:	8d e0       	ldi	r24, 0x0D	; 13
+ 3cc:	0e 94 3e 00 	call	0x7c	; 0x7c <DIO_WritePin>
+	DIO_WritePin(pin14,LOW);
+ 3d0:	60 e0       	ldi	r22, 0x00	; 0
+ 3d2:	8e e0       	ldi	r24, 0x0E	; 14
+ 3d4:	0e 94 3e 00 	call	0x7c	; 0x7c <DIO_WritePin>
+ 3d8:	08 95       	ret
+
+000003da <Timer_Init>:
+
+ 
+ void Timer_Init()
+ {	
+	/* Enable CTC Mode in TIMER 1 */	 	 
+	 Clear_Bit(TIMER1->TCCRA,WGM10);
+ 3da:	8f b5       	in	r24, 0x2f	; 47
+ 3dc:	8e 7f       	andi	r24, 0xFE	; 254
+ 3de:	8f bd       	out	0x2f, r24	; 47
+	 Clear_Bit(TIMER1->TCCRA,WGM11);
+ 3e0:	8f b5       	in	r24, 0x2f	; 47
+ 3e2:	8d 7f       	andi	r24, 0xFD	; 253
+ 3e4:	8f bd       	out	0x2f, r24	; 47
+	 Clear_Bit(TIMER1->TCCRB,WGM13);
+ 3e6:	8e b5       	in	r24, 0x2e	; 46
+ 3e8:	8f 7e       	andi	r24, 0xEF	; 239
+ 3ea:	8e bd       	out	0x2e, r24	; 46
+	 Set_Bit(TIMER1->TCCRB,WGM12);
+ 3ec:	8e b5       	in	r24, 0x2e	; 46
+ 3ee:	88 60       	ori	r24, 0x08	; 8
+ 3f0:	8e bd       	out	0x2e, r24	; 46
+	 /* set ocra */
+	
+	 TIMER1->OCRAH= OCR_value >> EIGHT_SHIFT;
+ 3f2:	8e e3       	ldi	r24, 0x3E	; 62
+ 3f4:	8b bd       	out	0x2b, r24	; 43
+	 TIMER1->OCRAL= OCR_value & LOW_MASK;
+ 3f6:	80 e8       	ldi	r24, 0x80	; 128
+ 3f8:	8a bd       	out	0x2a, r24	; 42
+	 /* choose prescelar */
+	 Set_Bit(TIMER1->TCCRB,CS00);
+ 3fa:	8e b5       	in	r24, 0x2e	; 46
+ 3fc:	81 60       	ori	r24, 0x01	; 1
+ 3fe:	8e bd       	out	0x2e, r24	; 46
+	 Clear_Bit(TIMER1->TCCRB,CS01);
+ 400:	8e b5       	in	r24, 0x2e	; 46
+ 402:	8d 7f       	andi	r24, 0xFD	; 253
+ 404:	8e bd       	out	0x2e, r24	; 46
+	 Clear_Bit(TIMER1->TCCRB,CS02); 
+ 406:	8e b5       	in	r24, 0x2e	; 46
+ 408:	8b 7f       	andi	r24, 0xFB	; 251
+ 40a:	8e bd       	out	0x2e, r24	; 46
+	 
+	 /* Enable Interrupt */
+	 Set_Bit(TIMSK,OCIE1A);
+ 40c:	89 b7       	in	r24, 0x39	; 57
+ 40e:	80 61       	ori	r24, 0x10	; 16
+ 410:	89 bf       	out	0x39, r24	; 57
+	 
+	 /*Enable Global Interrupt*/
+	 sei();
+ 412:	78 94       	sei
+ 414:	08 95       	ret
+
+00000416 <Set_CallBack>:
+* to the argument void (*ptr)(void)
+
+****************************************************************************/
+void Set_CallBack(void (*ptr)(void)){
+	
+	Call_Back=ptr;
+ 416:	90 93 84 00 	sts	0x0084, r25	; 0x800084 <Call_Back+0x1>
+ 41a:	80 93 83 00 	sts	0x0083, r24	; 0x800083 <Call_Back>
+ 41e:	08 95       	ret
+
+00000420 <__vector_7>:
+	
+}
+
+ 
+ ISR(TIMER1_COMPA_vect){
+ 420:	1f 92       	push	r1
+ 422:	0f 92       	push	r0
+ 424:	0f b6       	in	r0, 0x3f	; 63
+ 426:	0f 92       	push	r0
+ 428:	11 24       	eor	r1, r1
+ 42a:	2f 93       	push	r18
+ 42c:	3f 93       	push	r19
+ 42e:	4f 93       	push	r20
+ 430:	5f 93       	push	r21
+ 432:	6f 93       	push	r22
+ 434:	7f 93       	push	r23
+ 436:	8f 93       	push	r24
+ 438:	9f 93       	push	r25
+ 43a:	af 93       	push	r26
+ 43c:	bf 93       	push	r27
+ 43e:	ef 93       	push	r30
+ 440:	ff 93       	push	r31
+	
+	 Call_Back();
+ 442:	e0 91 83 00 	lds	r30, 0x0083	; 0x800083 <Call_Back>
+ 446:	f0 91 84 00 	lds	r31, 0x0084	; 0x800084 <Call_Back+0x1>
+ 44a:	09 95       	icall
+	
+	
+ }
+ 44c:	ff 91       	pop	r31
+ 44e:	ef 91       	pop	r30
+ 450:	bf 91       	pop	r27
+ 452:	af 91       	pop	r26
+ 454:	9f 91       	pop	r25
+ 456:	8f 91       	pop	r24
+ 458:	7f 91       	pop	r23
+ 45a:	6f 91       	pop	r22
+ 45c:	5f 91       	pop	r21
+ 45e:	4f 91       	pop	r20
+ 460:	3f 91       	pop	r19
+ 462:	2f 91       	pop	r18
+ 464:	0f 90       	pop	r0
+ 466:	0f be       	out	0x3f, r0	; 63
+ 468:	0f 90       	pop	r0
+ 46a:	1f 90       	pop	r1
+ 46c:	18 95       	reti
+
+0000046e <_exit>:
+ 46e:	f8 94       	cli
+
+00000470 <__stop_program>:
+ 470:	ff cf       	rjmp	.-2      	; 0x470 <__stop_program>
